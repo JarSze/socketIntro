@@ -13,16 +13,28 @@ public class ClientApplication
 {
     public static void main( String[] args )
     {
+        System.out.println( "App started with params like: " );
+        for( String arg : args )
+        {
+            System.out.println( arg );
+        }
+
+        //String start_args = args[ 0 ];
+
         Socket clientSocket = new Socket();
+        Scanner scanner = new Scanner( System.in );
         try
         {
-            clientSocket.connect( new InetSocketAddress( "localhost", 5000 ) );
+            clientSocket.connect( new InetSocketAddress( "localhost", Integer.parseInt( args[0] ) ) );
 
             BufferedReader reader =
                 new BufferedReader( new InputStreamReader( clientSocket.getInputStream() ) );
             PrintWriter writer = new PrintWriter( (clientSocket.getOutputStream()) );
 
-            writer.write( "Message from client: Writer write hello world!\n" );
+            System.out.println( "Enter message to server: " );
+            String message = scanner.nextLine();
+
+            writer.write( message + "\n" );
             writer.flush();
 
             String response = reader.readLine();
