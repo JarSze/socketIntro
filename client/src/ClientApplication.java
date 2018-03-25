@@ -18,15 +18,15 @@ public class ClientApplication
         {
             clientSocket.connect( new InetSocketAddress( "localhost", 5000 ) );
 
-            Scanner reader = new Scanner( clientSocket.getInputStream() );
+            BufferedReader reader =
+                new BufferedReader( new InputStreamReader( clientSocket.getInputStream() ) );
             PrintWriter writer = new PrintWriter( (clientSocket.getOutputStream()) );
 
-            writer.write( "Writer write hello world!\n" );
+            writer.write( "Message from client: Writer write hello world!\n" );
             writer.flush();
 
-            String response = reader.next();
+            String response = reader.readLine();
             System.out.println( "Server responded with message: " + response );
-
         }
         catch( IOException e )
         {

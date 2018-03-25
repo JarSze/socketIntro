@@ -31,7 +31,7 @@ public class ServerApplication
 
                 String message = reader.readLine();
                 System.out.println( "Received message: " + message );
-                writter.write( "dupa" );
+                writter.write( "this is message from server" );
                 writter.flush();
                 client.close();
                 //serverSocket.close();
